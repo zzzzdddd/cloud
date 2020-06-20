@@ -1,4 +1,4 @@
 .idea
 *.iml
-cloud-consumer-order80/target
-cloud-provider-payment8001/target
+/cloud-consumer-order80/target
+/cloud-provider-payment8001/target
