@@ -2,6 +2,7 @@ package com.example.cloud.controller;
 
 import com.example.cloud.entity.CommentResult;
 import com.example.cloud.entity.Payment;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +14,7 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("/consumer")
 public class OrderController {
-    private final static String URL = "http://localhost:8001";
+    private final static String URL = "http://cloud-payment-service";
 
     @Resource
     private RestTemplate restTemplate;

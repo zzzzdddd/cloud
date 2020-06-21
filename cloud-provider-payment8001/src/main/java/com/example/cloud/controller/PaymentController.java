@@ -3,6 +3,7 @@ package com.example.cloud.controller;
 import com.example.cloud.entity.CommentResult;
 import com.example.cloud.entity.Payment;
 import com.example.cloud.service.PaymentService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -13,12 +14,14 @@ public class PaymentController {
 
     @Resource
     private PaymentService paymentService;
+    @Value("${server.port}")
+    private String port;
 
     @PostMapping("/insert")
     public CommentResult<Integer> insert(@RequestBody Payment payment){
         int result = paymentService.insert(payment);
         if (result > 0){
-            return new CommentResult<>(200,"成功",result );
+            return new CommentResult<>(200,port+"成功",result );
         }else {
             return new CommentResult<>(400,"失败", null);
         }
@@ -29,9 +32,14 @@ public class PaymentController {
         Payment payment = paymentService.getPaymentById(id);
         System.out.println("配置成功");
         if (payment != null){
-            return new CommentResult<>(200,"成功", payment);
+            return new CommentResult<>(200,port+"成功", payment);
         }
         return new CommentResult<>(400,"失败");
 
+    }
+
+    @GetMapping("/lb")
+    public CommentResult<String> getLb(){
+        return new CommentResult<>(200,"成功");
     }
 }
